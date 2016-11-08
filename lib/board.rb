@@ -1,14 +1,20 @@
 class Board
   attr_reader :size, :mines, :grid
 
-  def initialize(size=10, mines=9)
+  def initialize(size=10, mines=9, grid = nil)
     @size = size
     @mines = mines
-    @grid = Array.new(10) { Array.new(10) { Cell.new }}
+    @grid = grid || Array.new(10) { Array.new(10) { Cell.new }}
   end
 
   def setup
     place_mines
+  end
+
+  def get_adjacent_mines(x, y)[]
+    adjacent_cells(x, y).count do |cell|
+      cell.mine
+    end
   end
 
   def place_mines
@@ -30,5 +36,17 @@ class Board
     x = rand(0..@size)
     y = rand(0..@size)
     [x, y]
+  end
+
+  def adjacent_cells(x,y)
+    cells = []
+    cells << @grid[x-1][y-1]
+    cells << @grid[x][y-1]
+    cells << @grid[x][y+1]
+    cells << @grid[x-1][y]
+    cells << @grid[x+1][y]
+    cells << @grid[x+1][y+1]
+    cells << @grid[x+1][y-1]
+    cells << @grid[x-1][y+1]
   end
 end
