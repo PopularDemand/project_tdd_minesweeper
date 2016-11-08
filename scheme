@@ -1,0 +1,22 @@
+board
+  @grid = [ [0,0],
+  [0,0] ]
+  setup
+
+cells
+  mine?
+  cleared?
+  adjacent_mines
+
+player
+  clear(cell)
+  quit
+
+Renderer
+  render_board
+  messages
+
+Game
+  play
+  board.setup
+  loop
